@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="template/template :: head"></head>
+<body>
+<header th:replace="template/template :: header"></header>
+<div th:replace="template/template :: sidebar"></div>
+<section class="home-section">
+    <div class="container">
+        <h1 th:text="${titulo}"></h1>
+    </div>
+    <div class="container">
+        <a href="" class="btn btn-primary btn-sm" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/views/ubications/create}" th:text="'Nueva ubicación'"  title="'Crear nuevo registro'"></a>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Ubicación</th>
+                <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+                <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u:${ubicaciones}">
+                <th scope="row" th:text="${u.id}"></th>
+                <td th:text="${u.ubicacion}"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="btn btn-success btn-sm" th:href="@{/views/ubications/edit/} + ${u.id}" th:text="'Editar'"  title="'Editar'"></a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="btn btn-danger btn-sm" th:href="@{/views/ubications/delete/} + ${u.id}" th:text="'Eliminar'"  title="'Eliminar registro'"
+                                                             onclick="return confirm('¿Desea eliminar este registro?');"
+                ></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>

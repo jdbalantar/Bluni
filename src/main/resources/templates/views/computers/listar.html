@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="template/template :: head"></head>
+<body>
+<header th:replace="template/template :: header"></header>
+<div th:replace="template/template :: sidebar"></div>
+<section class="home-section">
+    <div class="container">
+        <h1 th:text="${titulo}"></h1>
+    </div>
+    <div class="container">
+        <form class="form-inline" th:action="@{/views/computers/}">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label>Filtrar: </label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Escribe el valor a buscar" required>
+                </div>
+                <div class="col-auto">
+                    <input type="submit" class="btn btn-primary mb-2" value="Buscar">&nbsp;&nbsp;
+                </div>
+                <div class="col-auto">
+                    <input type="button" class="btn btn-secondary mb-2" value="Limpiar" onclick="limpiarCampos()">
+                </div>
+                <div class="col-auto">
+                    <a href="" class="btn btn-primary mb-2" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/views/computers/create}" th:text="'Nuevo equipo'"  title="'Crear nuevo registro'"></a>
+                </div>
+                <div class="col-auto">
+                    <a class="nav-link float-right" th:href="@{/views/computers/(format=pdf)}" title="'Exportar PDF'" target="_blank">
+                        <img th:src="@{/img/pdf.png}" height="auto" class="img-pdf">
+                    </a>
+                </div>
+            </div>
+        </form>
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Board</th>
+                <th scope="col">Color</th>
+                <th scope="col">Disco Duro</th>
+                <th scope="col">GPU</th>
+                <th scope="col">MAC</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">CPU</th>
+                <th scope="col">RAM</th>
+                <th scope="col">TIpo</th>
+                <th scope="col">Ubicación</th>
+                <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+                <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cl:${computers}">
+                <th scope="row" th:text="${cl.id}"></th>
+                <td th:text="${cl.board}"></td>
+                <td th:text="${cl.color}"></td>
+                <td th:text="${cl.disco_duro}"></td>
+                <td th:text="${cl.grafica}"></td>
+                <td th:text="${cl.mac}"></td>
+                <td th:text="${cl.marca}"></td>
+                <td th:text="${cl.modelo}"></td>
+                <td th:text="${cl.procesador}"></td>
+                <td th:text="${cl.ram}"></td>
+                <td th:text="${cl.tipo}"></td>
+                <td th:text="${cl.ubication.ubicacion}"></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="btn btn-success btn-sm" th:href="@{/views/computers/edit/} + ${cl.id}" th:text="'Editar'"  title="'Editar'"></a></td>
+                <td sec:authorize="hasRole('ROLE_ADMIN')"><a href="" class="btn btn-danger btn-sm" th:href="@{/views/computers/delete/} + ${cl.id}" th:text="'Eliminar'"  title="'Eliminar registro'"
+                                                             onclick="return confirm('¿Desea eliminar este registro?');"
+                ></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>

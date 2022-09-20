@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template/template :: head"></head>
+<body>
+<header th:replace="template/template :: header"></header>
+<section class="container p-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card card-body border-0">
+                <img th:src="@{/img/404.jpg}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>

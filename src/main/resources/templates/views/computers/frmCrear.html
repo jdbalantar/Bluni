@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template/template :: head"></head>
+<body>
+<header th:replace="template/template :: header"></header>
+<div th:replace="template/template :: sidebar"></div>
+<section class="home-section">
+    <div class="container">
+        <div class="card bd-dark">
+            <div class="card-header bg-dark text-white" th:text="${titulo}">
+            </div>
+            <div class="card-body">
+                <form th:object="${computer}" th:action="@{/views/computers/save}" method="post">
+                    <input th:field="*{id}" type="hidden">
+                    <div class="row mb-3">
+                        <label for="board" class="col-sm-2 col-form-label">Tarjeta madre</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{board}" type="text" class="form-control" id="board" placeholder="ASUS XXX">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('board')}" th:errors="*{board}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="color" class="col-sm-2 col-form-label">Color del equipo</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{color}" type="text" class="form-control" id="color" placeholder="Negro, blanco, etc">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="disco_duro" class="col-sm-2 col-form-label">Disco Duro</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{disco_duro}" type="text" class="form-control" id="disco_duro" placeholder="SSD - HDD">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('disco_duro')}" th:errors="*{disco_duro}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="grafica" class="col-sm-2 col-form-label">Tarjeta gráfica</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{grafica}" type="text" class="form-control" id="grafica" placeholder="Nvidia - Radeon - XXX">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('grafica')}" th:errors="*{grafica}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="mac" class="col-sm-2 col-form-label">MAC</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{mac}" type="text" class="form-control" id="mac" placeholder="XX:Xx:xX:Xx:XX:Xx">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('mac')}" th:errors="*{mac}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="marca" class="col-sm-2 col-form-label">Marca</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{marca}" type="text" class="form-control" id="marca" placeholder="Asus, Dell, Compumax, IBM, etc">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="modelo" class="col-sm-2 col-form-label">Modelo</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{modelo}" type="text" class="form-control" id="modelo" placeholder="¿De qué modeelo es el equipo?">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="procesador" class="col-sm-2 col-form-label">Procesador</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{procesador}" type="text" class="form-control" id="procesador" placeholder="Intel o AMD XXX">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('procesador')}" th:errors="*{procesador}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="ram" class="col-sm-2 col-form-label">Ram</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{ram}" type="text" class="form-control" id="ram" placeholder="¿Cuantos Gygabytes tiene de RAM?">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('ram')}" th:errors="*{ram}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="tipo" class="col-sm-2 col-form-label">Tipo</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{tipo}" type="text" class="form-control" id="tipo" placeholder="¿Portatil? ¿Todo en uno? ¿De escritorio?">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></small>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="ubicacion" class="col-sm-2 col-form-label">Ubicacion</label>
+                        <div class="col-sm-8">
+                            <select th:field="*{ubication}" type="text" class="form-control" id="ubicacion">
+                                <option value="" th:each="ubicacion:${ubicaciones}" th:value="${ubicacion.id}" th:text="${ubicacion.ubicacion}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Guardar"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template/template :: head"></head>
+<body>
+<header th:replace="template/template :: header"></header>
+<section class="home-section">
+    <div th:replace="template/template :: sidebar"></div>
+    <div class="container">
+        <div class="card bd-dark">
+            <div class="card-header bg-dark text-white" th:text="${titulo}">
+            </div>
+            <div class="card-body">
+                <form th:object="${ubicacion}" th:action="@{/views/ubications/save}" method="post">
+                    <input th:field="*{id}" type="hidden">
+                    <div class="row mb-3">
+                        <label for="ubicacion" class="col-sm-2 col-form-label">Ubicación</label>
+                        <div class="col-sm-8">
+                            <input th:field="*{ubicacion}" type="text" class="form-control" id="ubicacion" placeholder="Bodega - Salón - Sala - Oficina">
+                            <small class="form-text text-danger" th:if="${#fields.hasErrors('ubicacion')}" th:errors="*{ubicacion}"></small>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Guardar"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>

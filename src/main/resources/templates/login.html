@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template/template :: head"></head>
+<body>
+<div th:replace="template/template :: sidebar"></div>
+<header th:replace="template/template :: header"></header>
+
+<main class="container">
+    <section class="container d-inline-flex justify-content-center align-items-center flex-wrap">
+        <section>
+            <div class="card border-0" style="width: 27rem;">
+                <div class="card-body">
+                    <h1 class="fw-bold">Bluni</h1>
+                    <p class="fs-3 fw-light">Bluni te ayuda a llevar de una manera mas facil y organizada tu inventario.</p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="card" style="width: 27rem;">
+                    <div class="card-body">
+                        <form class="form-signin" method="post" th:action="@{/login}">
+                            <h2 class="form-signin-heading">Iniciar sesión</h2>
+                            <p>
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required
+                                       autofocus>
+                            </p>
+                            <p>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña"
+                                       required>
+                            </p>
+                            <input name="_csrf" type="hidden" value="993585d9-93ad-4f74-bc75-70508a168445"/>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>
+<footer th:replace="template/template :: footer"></footer>
+</body>
+</html>
